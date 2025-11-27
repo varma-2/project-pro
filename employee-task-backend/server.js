@@ -15,10 +15,13 @@ const tasksRouter = require('./routes/tasks');
 // Update CORS for production
 app.use(cors({
   origin: [
-    'https://your-frontend-app.vercel.app', // Your frontend URL
-    'http://localhost:3000' // For local development
+    'https://project-pro-12.vercel.app', // Your actual frontend URL
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'http://localhost:1234'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
 app.use(express.json());
