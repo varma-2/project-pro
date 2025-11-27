@@ -35,7 +35,7 @@ function App() {
   const [statusFilter, setStatusFilter] = useState('');
 
   // API Base URL
-  const API_BASE = 'http://localhost:4000';
+  const API_BASE = 'https://pruusxhuh.vercel.app';
 
   // Check backend connection and load initial data
   useEffect(() => {

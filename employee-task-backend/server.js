@@ -12,7 +12,15 @@ require('./db');
 const employeesRouter = require('./routes/employees');
 const tasksRouter = require('./routes/tasks');
 
-app.use(cors());
+// Update CORS for production
+app.use(cors({
+  origin: [
+    'https://your-frontend-app.vercel.app', // Your frontend URL
+    'http://localhost:3000' // For local development
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use('/employees', employeesRouter);
@@ -37,10 +45,11 @@ app.get('/health', (req, res) => {
   });
 });
 
-const PORT = 4000;
+// Use Vercel's port or default to 4000
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
-  console.log(`📊 Employees endpoint: http://localhost:${PORT}/employees`);
-  console.log(`📋 Tasks endpoint: http://localhost:${PORT}/tasks`);
-  console.log(`❤️ Health check: http://localhost:${PORT}/health`);
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`📊 Employees endpoint: /employees`);
+  console.log(`📋 Tasks endpoint: /tasks`);
+  console.log(`❤️ Health check: /health`);
 });
