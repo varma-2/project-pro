@@ -15,7 +15,7 @@ const tasksRouter = require('./routes/tasks');
 // Update CORS for production
 app.use(cors({
   origin: [
-    'https://project-pro-12.vercel.app', // Your actual frontend URL
+    'https://project-pro-21.vercel.app', // Your actual frontend URL
     'http://localhost:3000',
     'http://localhost:5173',
     'http://localhost:1234'
