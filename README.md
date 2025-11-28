@@ -113,3 +113,158 @@ project-root/
     vite.config.js
 
   README.md
+
+
+
+## 🚀 Backend – Setup & Run
+
+### 1. Go to backend folder
+```bash
+cd backend
+2. Install dependencies
+bash
+Copy code
+npm install
+3. Start the server
+bash
+Copy code
+node server.js
+# or
+npm start   
+Default Backend URL
+arduino
+Copy code
+http://localhost:4000
+🗄️ Database & Tables
+db.js creates the SQLite database file automatically:
+
+js
+Copy code
+const dbPath = path.join(__dirname, 'database.sqlite');
+It will automatically:
+Create employees and tasks tables (if they don’t exist)
+
+Insert sample employees and sample tasks if tables are empty
+
+Resetting the Database
+If you modify schema, simply delete:
+
+bash
+Copy code
+backend/database.sqlite
+Restart server → DB will be recreated with fresh structure and sample data.
+
+🌐 Backend API
+Health Check
+GET /health
+Response
+
+json
+Copy code
+{
+  "status": "OK",
+  "timestamp": "2024-02-10T12:34:56.789Z",
+  "service": "Employee Task Management API"
+}
+ Employees API
+Base URL: /employees
+
+1. Get all employees
+GET /employees
+json
+Copy code
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@company.com",
+    "role": "Software Engineer",
+    "status": "ACTIVE",
+    "created_at": "2024-02-10T10:00:00.000Z"
+  }
+]
+2. Get employee by ID
+GET /employees/:id
+3. Create a new employee
+POST /employees
+Body
+
+json
+Copy code
+{
+  "name": "New Employee",
+  "email": "new.employee@company.com",
+  "role": "Developer",
+  "status": "ACTIVE"
+}
+Rules:
+name, email, role → required
+
+email → must be unique
+
+4. Update an employee
+PUT /employees/:id
+json
+Copy code
+{
+  "name": "Updated Name",
+  "email": "updated.email@company.com",
+  "role": "Manager",
+  "status": "INACTIVE"
+}
+5. Delete an employee
+DELETE /employees/:id
+json
+Copy code
+{
+  "message": "Employee deleted successfully",
+  "tasksUnassigned": 2
+}
+📋 Tasks API
+Base URL: /tasks
+
+1. Get all tasks
+GET /tasks
+Example:
+
+json
+Copy code
+{
+  "id": 1,
+  "title": "Implement user authentication",
+  "description": "Add login and signup functionality",
+  "status": "IN_PROGRESS",
+  "priority": "HIGH",
+  "dueDate": "2024-02-15",
+  "employeeId": 1,
+  "employeeName": "John Doe"
+}
+2. Get task by ID
+GET /tasks/:id
+3. Create a task
+POST /tasks
+Body
+
+json
+Copy code
+{
+  "title": "New Task",
+  "description": "Details about the task",
+  "status": "TODO",
+  "priority": "MEDIUM",
+  "dueDate": "2024-02-20",
+  "employeeId": 1
+}
+Rules:
+title → required
+
+status → TODO | IN_PROGRESS | DONE
+
+priority → LOW | MEDIUM | HIGH
+
+employeeId → optional
+
+4. Update a task
+PUT /tasks/:id
+5. Delete a task
+DELETE /tasks/:id
