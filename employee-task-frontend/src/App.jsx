@@ -5,8 +5,7 @@ function App() {
   const [backendStatus, setBackendStatus] = useState('checking');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  
-  // Data states
+
   const [employees, setEmployees] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [stats, setStats] = useState({
@@ -16,7 +15,6 @@ function App() {
     completedTasks: 0
   });
 
-  // Form states
   const [newEmployee, setNewEmployee] = useState({
     name: '',
     email: '',
@@ -38,7 +36,6 @@ function App() {
   const API_BASE = 'https://project-pro-20.vercel.app';
 
 
-  // Check backend connection and load initial data
   useEffect(() => {
     const initializeApp = async () => {
       try {
@@ -62,7 +59,7 @@ function App() {
     initializeApp();
   }, []);
 
-  // Load employees from API
+  
   const loadEmployees = async () => {
     try {
       const response = await fetch(`${API_BASE}/employees`);
@@ -76,7 +73,6 @@ function App() {
     }
   };
 
-  // Load tasks from API
   const loadTasks = async () => {
     try {
       const response = await fetch(`${API_BASE}/tasks`);
@@ -90,7 +86,7 @@ function App() {
     }
   };
 
-  // Update statistics
+
   const updateStats = (empData, taskData) => {
     const totalEmployees = empData.length;
     const totalTasks = taskData.length;
@@ -105,7 +101,7 @@ function App() {
     });
   };
 
-  // Add new employee
+ 
   const handleAddEmployee = async (e) => {
     e.preventDefault();
     if (!newEmployee.name || !newEmployee.email || !newEmployee.role) {
@@ -137,7 +133,7 @@ function App() {
     }
   };
 
-  // Add new task
+  
   const handleAddTask = async (e) => {
     e.preventDefault();
     if (!newTask.title) {
@@ -181,7 +177,6 @@ function App() {
     }
   };
 
-  // Delete employee
   const handleDeleteEmployee = async (id) => {
     if (!window.confirm('Are you sure you want to delete this employee?')) return;
 
@@ -206,7 +201,6 @@ function App() {
     }
   };
 
-  // Delete task
   const handleDeleteTask = async (id) => {
     if (!window.confirm('Are you sure you want to delete this task?')) return;
 
@@ -227,7 +221,6 @@ function App() {
     }
   };
 
-  // Filter employees based on search and status
   const filteredEmployees = employees.filter(employee => {
     const matchesSearch = employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          employee.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -236,7 +229,6 @@ function App() {
     return matchesSearch && matchesStatus;
   });
 
-  // Filter tasks based on search and status
   const filteredTasks = tasks.filter(task => {
     const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          task.description.toLowerCase().includes(searchTerm.toLowerCase());
@@ -244,7 +236,7 @@ function App() {
     return matchesSearch && matchesStatus;
   });
 
-  // Global Styles Component
+ 
   const GlobalStyles = () => (
     <style>
       {`
