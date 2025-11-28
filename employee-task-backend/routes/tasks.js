@@ -1,9 +1,8 @@
-// routes/tasks.js
+
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
-// GET /tasks - all tasks with employee information
 router.get("/", (req, res) => {
   const sql = `
     SELECT 
@@ -21,7 +20,7 @@ router.get("/", (req, res) => {
       return res.status(500).json({ error: "Failed to fetch tasks" });
     }
     
-    // Transform data to match frontend expectations
+    
     const tasks = rows.map(row => ({
       id: row.id,
       title: row.title,
@@ -33,7 +32,7 @@ router.get("/", (req, res) => {
       employeeName: row.employee_name || 'Unassigned'
     }));
     
-    console.log(`✅ Fetched ${tasks.length} tasks`);
+    console.log(` Fetched ${tasks.length} tasks`);
     res.json(tasks);
   });
 });
@@ -69,8 +68,6 @@ router.post("/", (req, res) => {
     INSERT INTO tasks (title, description, status, priority, due_date, employee_id)
     VALUES (?, ?, ?, ?, ?, ?)
   `;
-
-  // Convert empty string to null for employeeId and handle dueDate
   const empId = (employeeId === '' || employeeId === null || employeeId === undefined) ? null : employeeId;
   const formattedDueDate = dueDate || null;
 
@@ -141,12 +138,11 @@ router.delete("/:id", (req, res) => {
       return res.status(404).json({ error: "Task not found" });
     }
 
-    console.log('✅ Task deleted successfully');
+    console.log(' Task deleted successfully');
     res.json({ message: "Task deleted successfully" });
   });
 });
 
-// GET /tasks/:id - get single task
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   
