@@ -1,9 +1,9 @@
-// routes/employees.js
+
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// GET /employees -> list all employees
+
 router.get('/', (req, res) => {
   const sql = 'SELECT * FROM employees ORDER BY created_at DESC';
   
@@ -12,12 +12,11 @@ router.get('/', (req, res) => {
       console.error('Error fetching employees:', err.message);
       return res.status(500).json({ error: 'Failed to fetch employees' });
     }
-    console.log(`✅ Fetched ${rows.length} employees`);
+    console.log(` Fetched ${rows.length} employees`);
     res.json(rows);
   });
 });
 
-// GET /employees/:id -> get single employee by id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   db.get('SELECT * FROM employees WHERE id = ?', [id], (err, row) => {
@@ -62,20 +61,20 @@ router.post('/', (req, res) => {
       return res.status(500).json({ error: 'Failed to create employee' });
     }
 
-    // Get the created employee to return complete data
+   
     db.get('SELECT * FROM employees WHERE id = ?', [this.lastID], (err, row) => {
       if (err) {
         console.error('Error fetching created employee:', err.message);
         return res.status(500).json({ error: 'Failed to fetch created employee' });
       }
       
-      console.log('✅ Employee created:', row);
+      console.log(' Employee created:', row);
       res.status(201).json(row);
     });
   });
 });
 
-// PUT /employees/:id -> update an employee
+
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const { name, email, role, status } = req.body;
@@ -116,7 +115,7 @@ router.put('/:id', (req, res) => {
         return res.status(500).json({ error: 'Failed to fetch updated employee' });
       }
       
-      console.log('✅ Employee updated:', row);
+      console.log('Employee updated:', row);
       res.json(row);
     });
   });
@@ -128,7 +127,7 @@ router.delete('/:id', (req, res) => {
   
   console.log(`🗑️ Deleting employee ID: ${id}`);
 
-  // First, unassign this employee from any tasks to maintain referential integrity
+  
   const unassignSql = 'UPDATE tasks SET employee_id = NULL WHERE employee_id = ?';
   
   db.run(unassignSql, [id], function(unassignErr) {
@@ -137,9 +136,8 @@ router.delete('/:id', (req, res) => {
       return res.status(500).json({ error: 'Failed to unassign tasks from employee' });
     }
     
-    console.log(`✅ Unassigned ${this.changes} tasks from employee`);
+    console.log(` Unassigned ${this.changes} tasks from employee`);
     
-    // Now delete the employee
     const deleteSql = 'DELETE FROM employees WHERE id = ?';
     
     db.run(deleteSql, [id], function (deleteErr) {
@@ -152,7 +150,7 @@ router.delete('/:id', (req, res) => {
         return res.status(404).json({ error: 'Employee not found' });
       }
       
-      console.log('✅ Employee deleted successfully');
+      console.log('Employee deleted successfully');
       res.json({ 
         message: 'Employee deleted successfully',
         tasksUnassigned: this.changes
