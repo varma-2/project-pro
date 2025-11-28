@@ -123,23 +123,23 @@ project-root/
 cd backend
 2. Install dependencies
 bash
-Copy code
+
 npm install
 3. Start the server
 bash
-Copy code
+
 node server.js
 # or
 npm start   
 Default Backend URL
 arduino
-Copy code
+
 http://localhost:4000
 🗄️ Database & Tables
 db.js creates the SQLite database file automatically:
 
 js
-Copy code
+
 const dbPath = path.join(__dirname, 'database.sqlite');
 It will automatically:
 Create employees and tasks tables (if they don’t exist)
@@ -150,7 +150,7 @@ Resetting the Database
 If you modify schema, simply delete:
 
 bash
-Copy code
+
 backend/database.sqlite
 Restart server → DB will be recreated with fresh structure and sample data.
 
@@ -160,7 +160,7 @@ GET /health
 Response
 
 json
-Copy code
+
 {
   "status": "OK",
   "timestamp": "2024-02-10T12:34:56.789Z",
@@ -190,7 +190,7 @@ POST /employees
 Body
 
 json
-Copy code
+
 {
   "name": "New Employee",
   "email": "new.employee@company.com",
@@ -205,7 +205,7 @@ email → must be unique
 4. Update an employee
 PUT /employees/:id
 json
-Copy code
+
 {
   "name": "Updated Name",
   "email": "updated.email@company.com",
@@ -228,7 +228,7 @@ GET /tasks
 Example:
 
 json
-Copy code
+
 {
   "id": 1,
   "title": "Implement user authentication",
@@ -246,7 +246,7 @@ POST /tasks
 Body
 
 json
-Copy code
+
 {
   "title": "New Task",
   "description": "Details about the task",
