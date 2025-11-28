@@ -1,4 +1,4 @@
-// src/components/TaskList.jsx
+
 import { useState } from 'react';
 
 function TaskList({ tasks, employees, onDelete }) {
@@ -539,11 +539,10 @@ function getDueDateAlertStyle(dueDate) {
 }
 
 function getDueDateAlert(dueDate) {
-  // Simple implementation - you can enhance this with actual date comparison
+
   return "Due Soon";
 }
 
-// Add these global styles to your CSS
 const globalStyles = `
   @keyframes slideInRight {
     from {
