@@ -8,6 +8,9 @@ A full-stack **Employee & Task Management System** built with:
 
 Designed and implemented by **Mln Varma (22BCE9592)**.
 
+![Dashboard](https://github.com/varma-2/project-pro/raw/c3820594804bc1cbcf650e8a707cdfce08648503/full.png)
+![Dashboard](https://github.com/varma-2/project-pro/raw/c3820594804bc1cbcf650e8a707cdfce08648503/recents.png)
+
 ---
 
 ##  Features
