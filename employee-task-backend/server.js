@@ -1,18 +1,16 @@
-// server.js
+
 const express = require('express');
 const cors = require('cors');
 
-console.log('🚀 Starting server.js...');
+console.log(' Starting server.js...');
 
 const app = express();
 
-// runs db.js and creates DB + tables
 require('./db');
 
 const employeesRouter = require('./routes/employees');
 const tasksRouter = require('./routes/tasks');
 
-// Update CORS for production
 app.use(cors({
   origin: [
     'https://project-pro-21.vercel.app', // Your actual frontend URL
@@ -39,7 +37,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// Health check endpoint
+
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
@@ -48,11 +46,11 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Use Vercel's port or default to 4000
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-  console.log(`📊 Employees endpoint: /employees`);
-  console.log(`📋 Tasks endpoint: /tasks`);
-  console.log(`❤️ Health check: /health`);
+  console.log(` Server running on port ${PORT}`);
+  console.log(` Employees endpoint: /employees`);
+  console.log(` Tasks endpoint: /tasks`);
+  console.log(` Health check: /health`);
 });
