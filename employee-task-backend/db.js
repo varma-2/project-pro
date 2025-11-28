@@ -1,4 +1,4 @@
-// db.js
+
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
@@ -7,9 +7,9 @@ console.log('📁 Initializing SQLite...');
 const dbPath = path.join(__dirname, 'database.sqlite');
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
-    console.error('❌ Error opening database:', err.message);
+    console.error(' Error opening database:', err.message);
   } else {
-    console.log('✅ Connected to SQLite database at', dbPath);
+    console.log(' Connected to SQLite database at', dbPath);
   }
 });
 
@@ -28,11 +28,10 @@ db.serialize(() => {
   `,
     (err) => {
       if (err) {
-        console.error('❌ Error creating employees table:', err.message);
+        console.error(' Error creating employees table:', err.message);
       } else {
-        console.log('✅ Employees table ready');
+        console.log(' Employees table ready');
         
-        // Insert sample employees if table is empty
         db.get('SELECT COUNT(*) as count FROM employees', (err, row) => {
           if (!err && row.count === 0) {
             console.log('📝 Inserting sample employees...');
@@ -42,9 +41,9 @@ db.serialize(() => {
               ('Mike Johnson', 'mike.johnson@company.com', 'Designer', 'INACTIVE')`, 
               (err) => {
                 if (err) {
-                  console.error('❌ Error inserting sample employees:', err.message);
+                  console.error(' Error inserting sample employees:', err.message);
                 } else {
-                  console.log('✅ Sample employees inserted');
+                  console.log(' Sample employees inserted');
                 }
               }
             );
@@ -71,23 +70,23 @@ db.serialize(() => {
   `,
     (err) => {
       if (err) {
-        console.error('❌ Error creating tasks table:', err.message);
+        console.error(' Error creating tasks table:', err.message);
       } else {
-        console.log('✅ Tasks table ready');
+        console.log(' Tasks table ready');
         
         // Insert sample tasks if table is empty
         db.get('SELECT COUNT(*) as count FROM tasks', (err, row) => {
           if (!err && row.count === 0) {
-            console.log('📝 Inserting sample tasks...');
+            console.log(' Inserting sample tasks...');
             db.run(`INSERT INTO tasks (title, description, status, priority, due_date, employee_id) VALUES 
               ('Implement user authentication', 'Add login and signup functionality', 'IN_PROGRESS', 'HIGH', '2024-02-15', 1),
               ('Design dashboard UI', 'Create modern dashboard design', 'TODO', 'MEDIUM', '2024-02-20', 3),
               ('API documentation', 'Document all backend endpoints', 'DONE', 'LOW', '2024-02-10', 2)`, 
               (err) => {
                 if (err) {
-                  console.error('❌ Error inserting sample tasks:', err.message);
+                  console.error(' Error inserting sample tasks:', err.message);
                 } else {
-                  console.log('✅ Sample tasks inserted');
+                  console.log(' Sample tasks inserted');
                 }
               }
             );
@@ -100,17 +99,17 @@ db.serialize(() => {
 
 // Add error handling for database operations
 db.on('error', (err) => {
-  console.error('❌ Database error:', err.message);
+  console.error(' Database error:', err.message);
 });
 
 // Graceful shutdown
 process.on('SIGINT', () => {
-  console.log('🔄 Closing database connection...');
+  console.log(' Closing database connection...');
   db.close((err) => {
     if (err) {
-      console.error('❌ Error closing database:', err.message);
+      console.error(' Error closing database:', err.message);
     } else {
-      console.log('✅ Database connection closed');
+      console.log(' Database connection closed');
     }
     process.exit(0);
   });
