@@ -1,4 +1,4 @@
-// src/components/EmployeeList.jsx
+
 import { useState } from 'react';
 
 function EmployeeList({ employees, onDelete }) {
@@ -77,7 +77,7 @@ function EmployeeList({ employees, onDelete }) {
   );
 }
 
-// Modern futuristic styles
+
 const containerStyle = {
   background: "linear-gradient(145deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)",
   borderRadius: "20px",
@@ -299,9 +299,8 @@ const globalStyles = `
       transform: scale(1);
     }
   }
-`;
+`
 
-// Add this to your global CSS file
 console.log('Add these global styles to your CSS:', globalStyles);
 
 export default EmployeeList;
